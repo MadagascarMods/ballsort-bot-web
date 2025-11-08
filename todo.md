@@ -36,3 +36,10 @@
 - [x] Exibir contador de tempo de recarga
 ## Logo
 - [x] Adicionar logo customizada no topo do site
+
+## GitHub
+- [x] Criar repositório no GitHub
+- [x] Fazer push do código
+
+## Correções
+- [x] Corrigir Dockerfile para incluir pasta patches
