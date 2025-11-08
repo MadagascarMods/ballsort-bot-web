@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "mysql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1762632216834,
+      "tag": "0000_mushy_scourge",
+      "breakpoints": true
+    }
+  ]
 }

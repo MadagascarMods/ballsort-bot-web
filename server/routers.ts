@@ -17,12 +17,10 @@ export const appRouter = router({
     }),
   }),
 
-  // TODO: add feature routers here, e.g.
-  // todo: router({
-  //   list: protectedProcedure.query(({ ctx }) =>
-  //     db.getUserTodos(ctx.user.id)
-  //   ),
-  // }),
+  bot: router({
+    // Endpoints públicos para controle do bot
+    // O controle real é feito via Socket.IO, mas mantemos endpoints para status
+  }),
 });
 
 export type AppRouter = typeof appRouter;
