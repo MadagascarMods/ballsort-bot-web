@@ -46,3 +46,4 @@
 - [x] Corrigir comando de start no Dockerfile
 - [x] Corrigir comando de start para usar servidor Node.js direto
 - [x] Adicionar tsconfig.json ao container de produção
+- [x] Adicionar vite.config.ts ao container de produção
