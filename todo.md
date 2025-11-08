@@ -43,3 +43,4 @@
 
 ## Correções
 - [x] Corrigir Dockerfile para incluir pasta patches
+- [x] Corrigir comando de start no Dockerfile
