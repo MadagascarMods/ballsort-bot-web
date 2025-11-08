@@ -136,12 +136,17 @@ export default function Home() {
       {/* Header com Créditos */}
       <div className="bg-black/30 backdrop-blur-sm border-b border-white/10 py-4">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-4 text-2xl font-bold">
-            <span className="text-purple-400">MadagascarMods</span>
-            <span className="text-white">&</span>
-            <span className="text-blue-400">ABSOLUT1FF</span>
+          <div className="flex items-center justify-center gap-6">
+            <img src="/logo.jpeg" alt="Logo" className="w-16 h-16 rounded-full" />
+            <div className="flex flex-col items-center">
+              <div className="flex items-center gap-4 text-2xl font-bold">
+                <span className="text-purple-400">MadagascarMods</span>
+                <span className="text-white">&</span>
+                <span className="text-blue-400">ABSOLUT1FF</span>
+              </div>
+              <p className="text-center text-gray-400 text-sm mt-1">Ball Sort Bot - Web Interface</p>
+            </div>
           </div>
-          <p className="text-center text-gray-400 text-sm mt-2">Ball Sort Bot - Web Interface</p>
         </div>
       </div>
 

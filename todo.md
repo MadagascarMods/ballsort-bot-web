@@ -34,3 +34,5 @@
 - [x] Adicionar sistema de espera automática (6 minutos)
 - [x] Mostrar status de energia no frontend
 - [x] Exibir contador de tempo de recarga
+## Logo
+- [x] Adicionar logo customizada no topo do site
