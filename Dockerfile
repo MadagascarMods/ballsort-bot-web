@@ -46,5 +46,8 @@ EXPOSE 3000
 # Set environment to production
 ENV NODE_ENV=production
 
+# Install tsx for running TypeScript
+RUN npm install -g tsx
+
 # Start the server
-CMD ["node", "dist/index.js"]
+CMD ["tsx", "server/_core/index.ts"]
