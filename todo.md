@@ -45,3 +45,4 @@
 - [x] Corrigir Dockerfile para incluir pasta patches
 - [x] Corrigir comando de start no Dockerfile
 - [x] Corrigir comando de start para usar servidor Node.js direto
+- [x] Adicionar tsconfig.json ao container de produção
