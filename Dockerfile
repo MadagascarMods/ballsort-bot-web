@@ -45,5 +45,5 @@ ENV NODE_ENV=production
 # Install tsx for running TypeScript
 RUN npm install -g tsx
 
-# Start the server
-CMD ["tsx", "server/_core/index.ts"]
+# Start the production server
+CMD ["tsx", "server/production.ts"]

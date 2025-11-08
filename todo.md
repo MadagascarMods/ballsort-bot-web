@@ -47,3 +47,4 @@
 - [x] Corrigir comando de start para usar servidor Node.js direto
 - [x] Adicionar tsconfig.json ao container de produção
 - [x] Adicionar vite.config.ts ao container de produção
+- [x] Criar servidor de produção sem dependência do Vite
