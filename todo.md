@@ -48,3 +48,6 @@
 - [x] Adicionar tsconfig.json ao container de produção
 - [x] Adicionar vite.config.ts ao container de produção
 - [x] Criar servidor de produção sem dependência do Vite
+
+## Bugs
+- [x] Bot não está iniciando quando clica em "Iniciar Bot" (corrigido: initializeSocket recebia parâmetro errado)

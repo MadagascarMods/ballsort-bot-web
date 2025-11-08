@@ -1,6 +1,6 @@
 import express from 'express';
 import { createServer } from 'http';
-import { Server as SocketIOServer } from 'socket.io';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { appRouter } from './routers';
@@ -15,14 +15,7 @@ const app = express();
 const httpServer = createServer(app);
 
 // Socket.IO
-const io = new SocketIOServer(httpServer, {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST'],
-  },
-});
-
-initializeSocket(io as any);
+initializeSocket(httpServer);
 
 // Middleware
 app.use(express.json());
