@@ -51,3 +51,6 @@
 
 ## Bugs
 - [x] Bot não está iniciando quando clica em "Iniciar Bot" (corrigido: initializeSocket recebia parâmetro errado)
+
+## Melhorias
+- [x] Implementar reconexão automática do Socket.IO no frontend

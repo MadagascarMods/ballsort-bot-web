@@ -39,19 +39,31 @@ export default function Home() {
 
   const socketRef = useRef<Socket | null>(null);
   const logsEndRef = useRef<HTMLDivElement>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [reconnectAttempts, setReconnectAttempts] = useState(0);
 
   useEffect(() => {
-    // Conectar ao Socket.IO
+    // Conectar ao Socket.IO com reconexão automática
     const socket = io(window.location.origin, {
       path: '/socket.io/',
       transports: ['websocket', 'polling'],
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      reconnectionAttempts: Infinity,
     });
 
     socketRef.current = socket;
 
     socket.on('connect', () => {
       console.log('Conectado ao servidor Socket.IO');
-      addLog('✓ Conectado ao servidor');
+      setIsConnected(true);
+      setReconnectAttempts(0);
+      if (logs.length > 0) {
+        addLog('✓ Reconectado ao servidor');
+      } else {
+        addLog('✓ Conectado ao servidor');
+      }
     });
 
     socket.on('log', (message: string) => {
@@ -72,10 +84,35 @@ export default function Home() {
       setStatus(newStatus);
     });
 
-    socket.on('disconnect', () => {
-      console.log('Desconectado do servidor Socket.IO');
+    socket.on('disconnect', (reason) => {
+      console.log('Desconectado do servidor Socket.IO:', reason);
+      setIsConnected(false);
       addLog('✗ Desconectado do servidor');
-      setIsRunning(false);
+      if (reason === 'io server disconnect') {
+        // Servidor desconectou, tentar reconectar manualmente
+        socket.connect();
+      }
+    });
+
+    socket.on('reconnect_attempt', (attempt) => {
+      console.log('Tentativa de reconexão:', attempt);
+      setReconnectAttempts(attempt);
+      addLog(`⟳ Tentando reconectar... (tentativa ${attempt})`);
+    });
+
+    socket.on('reconnect', (attempt) => {
+      console.log('Reconectado após', attempt, 'tentativas');
+      addLog(`✓ Reconectado com sucesso após ${attempt} tentativa(s)`);
+      setReconnectAttempts(0);
+    });
+
+    socket.on('reconnect_error', (error) => {
+      console.error('Erro ao reconectar:', error);
+    });
+
+    socket.on('reconnect_failed', () => {
+      console.error('Falha ao reconectar');
+      addLog('✗ Falha ao reconectar. Verifique sua conexão.');
     });
 
     // Solicitar status a cada 2 segundos
@@ -154,6 +191,26 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Painel de Controle */}
           <div className="space-y-6">
+            {/* Status de Conexão */}
+            {!isConnected && (
+              <Card className="bg-yellow-900/40 backdrop-blur-sm border-yellow-500/30">
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-3">
+                    <Loader2 className="h-5 w-5 text-yellow-400 animate-spin" />
+                    <div>
+                      <p className="text-yellow-400 font-bold">
+                        {reconnectAttempts > 0
+                          ? `Reconectando... (tentativa ${reconnectAttempts})`
+                          : 'Conectando ao servidor...'}
+                      </p>
+                      <p className="text-yellow-300 text-sm">
+                        Aguarde enquanto restabelecemos a conexão
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
             {/* Credenciais */}
             <Card className="bg-black/40 backdrop-blur-sm border-white/10">
               <CardHeader>
